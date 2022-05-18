@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="500dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardCornerRadius="20dp"
+    android:orientation="vertical"
+    tools:context=".Menu">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#553C3C"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="#553C3C"
+                    android:fontFamily="casual"
+                    android:padding="10dp"
+                    android:text="Cakes &amp; Pastries"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
+                    android:textStyle="bold" /><!--product title-->
+
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_cake"
+                android:layout_width="wrap_content"
+                android:layout_height="450dp"
+                android:layout_marginBottom="10dp"
+                android:background="#553C3C"
+                app:iss_auto_cycle="false"
+                app:iss_corner_radius="20"
+                app:iss_delay="0"
+                app:iss_error_image="@drawable/ic_launcher_background"
+                app:iss_period="5000" >
+            </com.denzcoskun.imageslider.ImageSlider>
+            <Button
+                android:id="@+id/button_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#FFFFFF"
+                android:shadowColor="#121212"
+                android:text="Order"
+                android:textColor="#372323"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

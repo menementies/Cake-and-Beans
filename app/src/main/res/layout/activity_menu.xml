@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#553C3C"
+    android:orientation="vertical"
+    tools:context=".Menu">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#553C3C"
+            android:fontFamily="cursive"
+            android:padding="10dp"
+            android:text="Cakes &amp; Beans"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#553C3C"
+            app:iss_auto_cycle="true"
+            app:iss_delay="0"
+            app:iss_error_image="@drawable/ic_launcher_background"
+            app:iss_period="3000">
+
+        </com.denzcoskun.imageslider.ImageSlider> <!--Carousel-->
+        <!--product title-->
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#553C3C" /><!--divider-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#553C3C"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/button_coffee"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#FFFFFF"
+                android:shadowColor="#121212"
+                android:text="Coffee &amp; Cocoa Beverages"
+                android:textColor="#372323"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/button_cake"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="15dp"
+                android:backgroundTint="#FFFFFF"
+                android:shadowColor="#121212"
+                android:text="Cakes &amp; Pastries"
+                android:textColor="#372323"
+                android:textSize="15dp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Our Best Sellers!!"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#553C3C"
+            android:padding="15dp"
+            app:iss_auto_cycle="true"
+            app:iss_corner_radius="10"
+            app:iss_delay="0"
+            app:iss_error_image="@drawable/ic_launcher_background"
+            app:iss_period="5000" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
