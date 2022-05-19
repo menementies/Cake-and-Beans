@@ -26,21 +26,21 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
                     android:background="#553C3C"
                     android:fontFamily="casual"
                     android:padding="10dp"
                     android:text="Coffee &amp; Cocoa Beverages"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold" /><!--product title-->
+                    android:textStyle="bold"
+                    android:gravity="center"/><!--product title-->
 
             </LinearLayout>
 

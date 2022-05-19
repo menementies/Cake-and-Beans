@@ -35,10 +35,10 @@ public class Menu extends AppCompatActivity {
         ImageSlider imageSlider1;
         imageSlider1 = findViewById(R.id.image_slider);
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.logoo, ScaleTypes.CENTER_INSIDE));
-        imageList.add(new SlideModel(R.drawable.cakes, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.coffee, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.bannerlogo, ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel(R.drawable.cakes, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.coffee, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.CENTER_CROP));
         imageSlider1.setImageList(imageList);
 
 

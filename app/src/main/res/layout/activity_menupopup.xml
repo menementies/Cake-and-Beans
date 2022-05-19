@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
+    android:layout_width="200dp"
     android:layout_height="250dp"
     android:layout_gravity="right"
     android:orientation="vertical"
@@ -17,13 +17,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#553C3C">
+        android:background="#553C3C"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/button_profile"
@@ -36,7 +38,7 @@
                 android:text="My Profile"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:iconTint="#00FFFFFF" />
 
@@ -51,7 +53,7 @@
                 android:text="Cart"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:iconTint="#00FFFFFF" />
 
@@ -66,7 +68,7 @@
                 android:text="Sign Out"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:iconTint="#00FFFFFF" />
 
@@ -81,7 +83,7 @@
                 android:text="About Us"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:iconTint="#00FFFFFF" />
         </LinearLayout>
