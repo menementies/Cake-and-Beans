@@ -41,12 +41,6 @@ public class Menu extends AppCompatActivity {
         imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.FIT));
         imageSlider1.setImageList(imageList);
 
-        ImageSlider menu1;
-        menu1 = findViewById(R.id.image_menu);
-        ArrayList<SlideModel> best = new ArrayList<>();
-        best.add(new SlideModel(R.drawable.ccc, ScaleTypes.FIT));
-        best.add(new SlideModel(R.drawable.ddd, ScaleTypes.FIT));
-        menu1.setImageList(best);
 
         btnCake = findViewById(R.id.button_cake);
         btnCake.setOnClickListener(new View.OnClickListener() {
