@@ -52,7 +52,6 @@
                 app:iss_auto_cycle="false"
                 app:iss_corner_radius="20"
                 app:iss_delay="0"
-                app:iss_error_image="@drawable/ic_launcher_background"
                 app:iss_period="5000" >
             </com.denzcoskun.imageslider.ImageSlider>
             <Button
