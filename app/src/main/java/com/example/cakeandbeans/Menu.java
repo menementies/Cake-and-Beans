@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
@@ -31,11 +32,12 @@ public class Menu extends AppCompatActivity {
         getSupportActionBar().hide();
         Button btnCake;
         Button btnCoffee;
+        ImageView menu;
 
         ImageSlider imageSlider1;
         imageSlider1 = findViewById(R.id.image_slider);
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.bannerlogo, ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel(R.drawable.bannerlogo, ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel(R.drawable.cakes, ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel(R.drawable.coffee, ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.CENTER_CROP));
@@ -57,7 +59,42 @@ public class Menu extends AppCompatActivity {
                 coffee();
             }
         });
+        menu = findViewById(R.id.button_menu);
+        menu.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                funcMenu();
+            }
+        });
     }
+
+    private void funcMenu() {
+        View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_menupopup, null);
+        AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);
+        alert2.setView(alertCustomDialog2);
+        AlertDialog dialog2 = alert2.create();
+
+        Button profile;
+        profile = (Button) alertCustomDialog2.findViewById(R.id.button_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next= new Intent(Menu.this,Profile.class);
+                startActivity(next);
+                finish();
+            }
+        });
+
+        dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog2.setCanceledOnTouchOutside(true);
+        dialog2.show();
+        WindowManager.LayoutParams layoutParams2 = new WindowManager.LayoutParams();
+        layoutParams2.copyFrom(dialog2.getWindow().getAttributes());
+        layoutParams2.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams2.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog2.getWindow().setAttributes(layoutParams2);
+    }
+
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
         builder.setTitle(R.string.app_name);
@@ -71,6 +108,7 @@ public class Menu extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     private void coffee() {
         View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_coffee, null);
         AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);
