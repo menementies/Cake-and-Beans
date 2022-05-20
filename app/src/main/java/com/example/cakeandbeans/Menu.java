@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -69,13 +70,13 @@ public class Menu extends AppCompatActivity {
     }
 
     private void funcMenu() {
-        View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_menupopup, null);
-        AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);
-        alert2.setView(alertCustomDialog2);
-        AlertDialog dialog2 = alert2.create();
+        View alertCustomDialog3 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_menupopup, null);
+        AlertDialog.Builder alert3 = new AlertDialog.Builder(Menu.this, R.style.my_dialog);
+        alert3.setView(alertCustomDialog3);
+        AlertDialog dialog3 = alert3.create();
 
         Button profile;
-        profile = (Button) alertCustomDialog2.findViewById(R.id.button_profile);
+        profile = (Button) alertCustomDialog3.findViewById(R.id.button_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,15 +85,16 @@ public class Menu extends AppCompatActivity {
                 finish();
             }
         });
-
-        dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog2.setCanceledOnTouchOutside(true);
-        dialog2.show();
-        WindowManager.LayoutParams layoutParams2 = new WindowManager.LayoutParams();
-        layoutParams2.copyFrom(dialog2.getWindow().getAttributes());
-        layoutParams2.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams2.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog2.getWindow().setAttributes(layoutParams2);
+        dialog3.getWindow().setLayout(150, 250);
+        dialog3.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog3.setCanceledOnTouchOutside(true);
+        dialog3.show();
+        WindowManager.LayoutParams layoutParamMenu = new WindowManager.LayoutParams();
+        layoutParamMenu.copyFrom(dialog3.getWindow().getAttributes());
+        layoutParamMenu.gravity = Gravity.TOP | Gravity.RIGHT;
+        layoutParamMenu.width = 500;
+        layoutParamMenu.height =750;
+        dialog3.getWindow().setAttributes(layoutParamMenu);
     }
 
     public void onBackPressed(){
