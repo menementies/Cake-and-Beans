@@ -11,13 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cakeandbeans.databinding.ActivitySignUpBinding;
+
 public class LoginForm extends AppCompatActivity {
+    //View binding
+    private ActivitySignUpBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        binding = ActivitySignUpBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         EditText etUsername, etPassword;
         Button btnsignIn, btnsignUp;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
 
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
