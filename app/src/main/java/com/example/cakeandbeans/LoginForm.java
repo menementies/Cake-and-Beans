@@ -15,15 +15,15 @@ public class LoginForm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EditText etUsername, etPassword;
-        Button btSubmit;
+        Button btnsignIn, btnsignUp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
-        btSubmit = findViewById(R.id.bt_submit);
-
-        btSubmit.setOnClickListener(new View.OnClickListener() {
+        btnsignIn = findViewById(R.id.bt_signIn);
+        btnsignUp = findViewById(R.id.bt_signUp);
+        btnsignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (etUsername.getText().toString().equals("admin") && etPassword.getText().toString().equals("admin")) {
@@ -34,6 +34,15 @@ public class LoginForm extends AppCompatActivity {
                 }else {
                     Toast.makeText(getApplicationContext(), "Use admin as username and password!!!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnsignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent next= new Intent(LoginForm.this,SignUp.class);
+                    startActivity(next);
+                    finish();
             }
         });
     }
