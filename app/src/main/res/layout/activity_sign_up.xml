@@ -34,7 +34,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="top|center"
-            app:srcCompat="@drawable/loginlogo"/>
+            app:srcCompat="@drawable/login_logo"/>
 
         <LinearLayout
             android:layout_width="280dp"
