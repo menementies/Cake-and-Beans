@@ -1,9 +1,11 @@
 package com.example.cakeandbeans;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,7 +48,6 @@ public class SignUp extends AppCompatActivity {
                 validateData();
             }
         });
-
 
 
         ImageView btnBack;
@@ -112,5 +113,11 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(SignUp.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void onBackPressed(){
+        Intent next= new Intent(SignUp.this,LoginForm.class);
+        startActivity(next);
+        finish();
     }
 }

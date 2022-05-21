@@ -167,7 +167,7 @@
                     android:textColor="@color/black"
                     android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout> <!--username-->
-        </LinearLayout><!--address-->
+        </LinearLayout><!--password-->
         <Button
             android:id="@+id/bt_signUp"
             android:layout_width="110dp"

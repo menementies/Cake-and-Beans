@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.cakeandbeans.databinding.ActivityProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
+
+
         Button btnCake;
         Button btnCoffee;
         ImageView menu;
@@ -67,6 +71,8 @@ public class Menu extends AppCompatActivity {
                 funcMenu();
             }
         });
+
+
     }
 
     private void funcMenu() {
