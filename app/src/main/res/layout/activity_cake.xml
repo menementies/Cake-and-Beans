@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="500dp"
+    android:layout_height="450dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#553C3C"
         app:cardCornerRadius="20dp">
 
@@ -33,7 +33,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
                     android:background="#553C3C"
                     android:fontFamily="casual"
                     android:padding="10dp"
@@ -46,14 +45,13 @@
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_cake"
-                android:layout_width="wrap_content"
-                android:layout_height="450dp"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
                 android:layout_marginBottom="10dp"
                 android:background="#553C3C"
                 app:iss_auto_cycle="false"
                 app:iss_corner_radius="20"
                 app:iss_delay="0"
-                app:iss_error_image="@drawable/ic_launcher_background"
                 app:iss_period="5000" >
             </com.denzcoskun.imageslider.ImageSlider>
             <Button

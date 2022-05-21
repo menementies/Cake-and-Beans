@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,26 +29,21 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_menu);
+        getSupportActionBar().hide();
         Button btnCake;
         Button btnCoffee;
+        ImageView menu;
 
         ImageSlider imageSlider1;
         imageSlider1 = findViewById(R.id.image_slider);
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.logoo, ScaleTypes.CENTER_INSIDE));
-        imageList.add(new SlideModel(R.drawable.cakes, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.coffee, ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.bannerlogo, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.cakes, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.coffee, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.CENTER_CROP));
         imageSlider1.setImageList(imageList);
 
-        ImageSlider menu1;
-        menu1 = findViewById(R.id.image_menu);
-        ArrayList<SlideModel> best = new ArrayList<>();
-        best.add(new SlideModel(R.drawable.ccc, ScaleTypes.FIT));
-        best.add(new SlideModel(R.drawable.ddd, ScaleTypes.FIT));
-        menu1.setImageList(best);
 
         btnCake = findViewById(R.id.button_cake);
         btnCake.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +60,43 @@ public class Menu extends AppCompatActivity {
                 coffee();
             }
         });
+        menu = findViewById(R.id.button_menu);
+        menu.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                funcMenu();
+            }
+        });
     }
+
+    private void funcMenu() {
+        View alertCustomDialog3 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_menupopup, null);
+        AlertDialog.Builder alert3 = new AlertDialog.Builder(Menu.this, R.style.my_dialog);
+        alert3.setView(alertCustomDialog3);
+        AlertDialog dialog3 = alert3.create();
+
+        Button profile;
+        profile = (Button) alertCustomDialog3.findViewById(R.id.button_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next= new Intent(Menu.this,Profile.class);
+                startActivity(next);
+                finish();
+            }
+        });
+        dialog3.getWindow().setLayout(150, 250);
+        dialog3.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog3.setCanceledOnTouchOutside(true);
+        dialog3.show();
+        WindowManager.LayoutParams layoutParamMenu = new WindowManager.LayoutParams();
+        layoutParamMenu.copyFrom(dialog3.getWindow().getAttributes());
+        layoutParamMenu.gravity = Gravity.TOP | Gravity.RIGHT;
+        layoutParamMenu.width = 500;
+        layoutParamMenu.height =750;
+        dialog3.getWindow().setAttributes(layoutParamMenu);
+    }
+
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
         builder.setTitle(R.string.app_name);
@@ -77,6 +110,7 @@ public class Menu extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     private void coffee() {
         View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_coffee, null);
         AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);

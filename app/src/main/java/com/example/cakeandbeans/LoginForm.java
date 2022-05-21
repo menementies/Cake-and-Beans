@@ -12,43 +12,37 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginForm extends AppCompatActivity {
-    EditText etUsername, etPassword;
-    Button btSubmit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EditText etUsername, etPassword;
+        Button btnsignIn, btnsignUp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
-        btSubmit = findViewById(R.id.bt_submit);
-
-        btSubmit.setOnClickListener(new View.OnClickListener() {
+        btnsignIn = findViewById(R.id.bt_signIn);
+        btnsignUp = findViewById(R.id.bt_signUp);
+        btnsignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (etUsername.getText().toString().equals("admin") && etPassword.getText().toString().equals("admin")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            LoginForm.this
-                    );
-                    builder.setIcon(R.drawable.ic_baseline_check_circle_24);
-                    builder.setTitle("Login Successful!");
-                    builder.setMessage("Welcome to Cake & Beans <3");
-                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
+                    Toast.makeText(LoginForm.this, "Logged In Successfully",  Toast.LENGTH_SHORT).show();
                             Intent next= new Intent(LoginForm.this,Menu.class);
                             startActivity(next);
                             finish();
-                        }
-                    });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-
                 }else {
                     Toast.makeText(getApplicationContext(), "Use admin as username and password!!!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnsignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent next= new Intent(LoginForm.this,SignUp.class);
+                    startActivity(next);
+                    finish();
             }
         });
     }
