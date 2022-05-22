@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cakeandbeans">
 
-    <uses-permission android:name="android.permission.INTERNET "/>
+    <uses-permission android:name="android.permission.INTERNET " />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/brand"
@@ -10,6 +11,24 @@
         android:roundIcon="@drawable/brand"
         android:supportsRtl="true"
         android:theme="@style/Theme.CakeAndBeans">
+        <class
+            android:name=".SpaceItemDecoration"
+            android:exported="false" />
+        <class
+            android:name=".IOrderLoadListener"
+            android:exported="false" />
+        <class
+            android:name=".listener.ICartLoadListener"
+            android:exported="false" />
+        <class
+            android:name=".adapter.OrderAdapter"
+            android:exported="false" />
+        <class
+            android:name=".Orders"
+            android:exported="false" />
+        <class
+            android:name=".CartModel"
+            android:exported="false" />
         <activity
             android:name=".SignUp"
             android:exported="false" />
