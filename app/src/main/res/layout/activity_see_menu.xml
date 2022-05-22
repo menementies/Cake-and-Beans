@@ -12,7 +12,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:cardCornerRadius="20dp"
     android:orientation="vertical"
-    tools:context=".Menu">
+    tools:context=".SeeMenu">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

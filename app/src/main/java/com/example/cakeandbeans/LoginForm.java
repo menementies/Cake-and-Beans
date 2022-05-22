@@ -29,7 +29,6 @@ public class LoginForm extends AppCompatActivity {
     private String email="",password="";
     //progress dialog
     private ProgressDialog progressDialog;
-
     //firebase auth
     private FirebaseAuth firebaseAuth;
 
@@ -67,7 +66,6 @@ public class LoginForm extends AppCompatActivity {
         });
 
     }
-
     private void checkUser() {
         //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -84,7 +82,7 @@ public class LoginForm extends AppCompatActivity {
         password=binding.etPassword.getText().toString().trim();
         //validate data
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            //email format aint valid..dont proceed eme
+            //email format ain't valid..don't proceed eme
             binding.etEmail.setError("Invalid email format!");
         } else if (TextUtils.isEmpty(password)) {
             //no password entered
@@ -107,6 +105,9 @@ public class LoginForm extends AppCompatActivity {
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         String email = firebaseUser.getEmail();
                         Toast.makeText(LoginForm.this,"Logged In\n", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(LoginForm.this, Menu.class));
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -123,8 +124,6 @@ public class LoginForm extends AppCompatActivity {
                 });
 
     }
-
-
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginForm.this);
         builder.setTitle(R.string.app_name);

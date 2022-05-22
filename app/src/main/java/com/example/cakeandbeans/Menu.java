@@ -44,18 +44,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Menu extends AppCompatActivity implements ICartLoadListener, IOrderLoadListener {
-    @BindView(R.id.order)
-    RecyclerView order;
-    @BindView(R.id.menu_layout)
-    RelativeLayout menu_layout;
-    @BindView(R.id.badge)
-    NotificationBadge badge;
-    @BindView(R.id.button_menu)
-    FrameLayout button_menu;
-
-    ICartLoadListener cartLoadListener;
-    IOrderLoadListener orderLoadListener;
+public class Menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +52,6 @@ public class Menu extends AppCompatActivity implements ICartLoadListener, IOrder
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
 
-        Button btnCake;
         Button btnSeeMenu;
         ImageView menu;
 
@@ -81,9 +69,12 @@ public class Menu extends AppCompatActivity implements ICartLoadListener, IOrder
         btnSeeMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                seeMenu();
+                Intent next = new Intent(Menu.this, SeeMenu.class);
+                startActivity(next);
+                finish();
             }
         });
+        //three dats
         menu = findViewById(R.id.button_menu);
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,45 +82,6 @@ public class Menu extends AppCompatActivity implements ICartLoadListener, IOrder
                 funcMenu();
             }
         });
-
-        init();
-        loadOrdersFromFirebase();
-    }
-
-    private void loadOrdersFromFirebase() {
-        List<Orders> orders = new ArrayList<>();
-        FirebaseDatabase.getInstance()
-                .getReference("Items")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            for (DataSnapshot drinkSnapshot : snapshot.getChildren()) {
-                                Orders order = drinkSnapshot.getValue(Orders.class);
-                                order.setKey((drinkSnapshot.getKey()));
-                                orders.add(order);
-                            }
-                            orderLoadListener.onOrderLoadLSuccess(orders);
-                        } else
-                            orderLoadListener.onOrderLoadFailed("Item not Found");
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
-
-    private void init() {
-        ButterKnife.bind(this);
-
-        cartLoadListener = this;
-        orderLoadListener = this;
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        order.setLayoutManager(gridLayoutManager);
-        order.addItemDecoration(new SpaceItemDecoration());
     }
 
     private void funcMenu() {
@@ -172,53 +124,5 @@ public class Menu extends AppCompatActivity implements ICartLoadListener, IOrder
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    private void seeMenu() {
-        View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_see_menu, null);
-        AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);
-        alert2.setView(alertCustomDialog2);
-        AlertDialog dialog2 = alert2.create();
-
-
-        Button order2;
-        order2 = (Button) alertCustomDialog2.findViewById(R.id.button_order2);
-        order2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog2.dismiss();
-                Toast.makeText(Menu.this, "Ordered Successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        dialog2.getWindow().setLayout(350, 500);
-        dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog2.setCanceledOnTouchOutside(true);
-        dialog2.show();
-        WindowManager.LayoutParams layoutParams2 = new WindowManager.LayoutParams();
-        layoutParams2.copyFrom(dialog2.getWindow().getAttributes());
-        layoutParams2.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams2.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog2.getWindow().setAttributes(layoutParams2);
-
-    }
-
-    @Override
-    public void onCartLoadLSuccess(List<CartModel> cartModelList) {
-    }
-
-    @Override
-    public void onCartLoadFailed(String message) {
-    }
-
-    @Override
-    public void onOrderLoadLSuccess(List<Orders> orderList) {
-        OrderAdapter adapter = new OrderAdapter(this,orderList);
-        order.setAdapter(adapter);
-    }
-
-    @Override
-    public void onOrderLoadFailed(String message) {
-        Snackbar.make(menu_layout, message, Snackbar.LENGTH_LONG).show();
     }
 }
