@@ -42,6 +42,7 @@ public class SignUp extends AppCompatActivity {
         progressDialog.setTitle("Please wait");
         progressDialog.setMessage("Creating your account...");
         progressDialog.setCanceledOnTouchOutside(false);
+
         binding.btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,8 +50,22 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        ImageView btnBack, btnGoogle, btnFb;
+        btnGoogle = findViewById(R.id.btn_gogol);
+        btnGoogle.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignUp.this, "Sorry, not working. Try Signing Up", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        ImageView btnBack;
+        btnFb=findViewById(R.id.btn_fb);
+        btnFb.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignUp.this, "Sorry, not working. Try Signing Up", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
