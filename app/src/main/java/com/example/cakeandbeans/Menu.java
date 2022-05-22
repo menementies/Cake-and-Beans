@@ -1,9 +1,11 @@
 package com.example.cakeandbeans;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,22 +19,49 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.cakeandbeans.adapter.OrderAdapter;
+import com.example.cakeandbeans.listener.ICartLoadListener;
+import com.example.cakeandbeans.listener.IOrderLoadListener;
+import com.example.cakeandbeans.utils.SpaceItemDecoration;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Menu extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class Menu extends AppCompatActivity implements ICartLoadListener, IOrderLoadListener {
+    @BindView(R.id.order)
+    RecyclerView order;
+    @BindView(R.id.menu_layout)
+    RelativeLayout menu_layout;
+    @BindView(R.id.badge)
+    NotificationBadge badge;
+    @BindView(R.id.button_menu)
+    FrameLayout button_menu;
+
+    ICartLoadListener cartLoadListener;
+    IOrderLoadListener orderLoadListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
         Button btnCake;
-        Button btnCoffee;
+        Button btnSeeMenu;
         ImageView menu;
 
         ImageSlider imageSlider1;
@@ -44,20 +73,11 @@ public class Menu extends AppCompatActivity {
         imageList.add(new SlideModel(R.drawable.coffee2, ScaleTypes.CENTER_CROP));
         imageSlider1.setImageList(imageList);
 
-
-        btnCake = findViewById(R.id.button_cake);
-        btnCake.setOnClickListener(new View.OnClickListener() {
+        btnSeeMenu = findViewById(R.id.button_see_menu);
+        btnSeeMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cake();
-            }
-        });
-
-        btnCoffee = findViewById(R.id.button_coffee);
-        btnCoffee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                coffee();
+                seeMenu();
             }
         });
         menu = findViewById(R.id.button_menu);
@@ -67,6 +87,49 @@ public class Menu extends AppCompatActivity {
                 funcMenu();
             }
         });
+
+        init();
+        loadOrdersFromFirebase();
+
+    }
+
+    private void loadOrdersFromFirebase() {
+        List<Orders> orders = new ArrayList<>();
+        FirebaseDatabase.getInstance()
+                .getReference("Items")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+                            for(DataSnapshot drinkSnapshot:snapshot.getChildren())
+                            {
+                                Orders order = drinkSnapshot.getValue(Orders.class);
+                                order.setKey((drinkSnapshot.getKey()));
+                                orders.add(order);
+                            }
+                            orderLoadListener.onOrderLoadLSuccess(orders);
+                        }
+                        else
+                            orderLoadListener.onOrderLoadFailed("Item not Found");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void init(){
+        ButterKnife.bind(this);
+
+        cartLoadListener = this;
+        orderLoadListener =this;
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        order.setLayoutManager(gridLayoutManager);
+        order.addItemDecoration(new SpaceItemDecoration());
     }
 
     private void funcMenu() {
@@ -111,21 +174,11 @@ public class Menu extends AppCompatActivity {
         alert.show();
     }
 
-    private void coffee() {
-        View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_coffee, null);
+    private void seeMenu() {
+        View alertCustomDialog2 = LayoutInflater.from(Menu.this).inflate(R.layout.activity_see_menu, null);
         AlertDialog.Builder alert2 = new AlertDialog.Builder(Menu.this);
         alert2.setView(alertCustomDialog2);
         AlertDialog dialog2 = alert2.create();
-
-        ImageSlider coffee;
-        coffee = alertCustomDialog2.findViewById(R.id.image_coffee);
-        ArrayList<SlideModel> coffeeMenu = new ArrayList<>();
-        coffeeMenu.add(new SlideModel(R.drawable.c1, ScaleTypes.CENTER_INSIDE));
-        coffeeMenu.add(new SlideModel(R.drawable.c2, ScaleTypes.CENTER_INSIDE));
-        coffeeMenu.add(new SlideModel(R.drawable.c4, ScaleTypes.CENTER_INSIDE));
-        coffeeMenu.add(new SlideModel(R.drawable.c6, ScaleTypes.CENTER_INSIDE));
-        coffeeMenu.add(new SlideModel(R.drawable.c7, ScaleTypes.CENTER_INSIDE));
-        coffee.setImageList(coffeeMenu);
 
         Button order2;
         order2 = (Button) alertCustomDialog2.findViewById(R.id.button_order2);
@@ -149,43 +202,24 @@ public class Menu extends AppCompatActivity {
 
     }
 
-    private void cake() {
-        View alertCustomDialog = LayoutInflater.from(Menu.this).inflate(R.layout.activity_cake, null);
-        AlertDialog.Builder alert = new AlertDialog.Builder(Menu.this);
-        alert.setView(alertCustomDialog);
-        AlertDialog dialog = alert.create();
+    @Override
+    public void onCartLoadLSuccess(List<CartModel> cartModelList) {
 
-        ImageSlider menu2;
-        menu2 = alertCustomDialog.findViewById(R.id.image_cake);
-        ArrayList<SlideModel> cakeMenu = new ArrayList<>();
-        cakeMenu.add(new SlideModel(R.drawable.a, ScaleTypes.CENTER_INSIDE));
-        cakeMenu.add(new SlideModel(R.drawable.b, ScaleTypes.CENTER_INSIDE));
-        cakeMenu.add(new SlideModel(R.drawable.c, ScaleTypes.CENTER_INSIDE));
-        cakeMenu.add(new SlideModel(R.drawable.d, ScaleTypes.CENTER_INSIDE));
-        cakeMenu.add(new SlideModel(R.drawable.e, ScaleTypes.CENTER_INSIDE));
-        cakeMenu.add(new SlideModel(R.drawable.f, ScaleTypes.CENTER_INSIDE));
-        menu2.setImageList(cakeMenu);
+    }
 
+    @Override
+    public void onCartLoadFailed(String message) {
 
-        Button order;
-        order = (Button) alertCustomDialog.findViewById(R.id.button_order);
-        order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                Toast.makeText(Menu.this, "Ordered Successfully",  Toast.LENGTH_SHORT).show();
-            }
-        });
+    }
 
-        dialog.getWindow().setLayout(350, 500);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.show();
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        layoutParams.copyFrom(dialog.getWindow().getAttributes());
-        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setAttributes(layoutParams);
+    @Override
+    public void onOrderLoadLSuccess(List<Orders> orderList) {
+        OrderAdapter adapter = new OrderAdapter(this,orderList);
+        order.setAdapter(adapter);
+    }
 
+    @Override
+    public void onOrderLoadFailed(String message) {
+        Snackbar.make(menu_layout, message, Snackbar.LENGTH_LONG).show();
     }
 }

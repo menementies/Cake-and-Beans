@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/activity_cake.xml" value="0.358695652173913" />
-        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/activity_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/activity_coffee.xml" value="0.36666666666666664" />
+        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/activity_menupopup.xml" value="0.358695652173913" />
-        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/cart.xml" value="0.36666666666666664" />
+        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/cart.xml" value="0.25" />
+        <entry key="..\:/Study/3rd year 2nd sem/App dev/Projects/Cake-and-Beans/app/src/main/res/layout/layout_items.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/MyllynJnnGbrl/CakeandBeans/app/src/main/res/drawable/round_button.xml" value="0.1" />
         <entry key="..\:/Users/MyllynJnnGbrl/CakeandBeans/app/src/main/res/drawable/round_edittext.xml" value="0.1795" />
         <entry key="..\:/Users/MyllynJnnGbrl/CakeandBeans/app/src/main/res/layout-land/activity_menu.xml" value="0.15961199294532627" />
